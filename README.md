@@ -24,3 +24,36 @@ Setup react app : npx create-react-app client --template typescript (from projec
 		integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"
 	/>
+
+## PostgreSQL
+
+#### Insert
+INSERT INTO public."users"("name", "login")
+VALUES ('James Bond', 'jbond')
+
+#### Get all
+SELECT * FROM public."users"
+or SELECT name FROM public."users"
+or SELECT name, login FROM public."users"
+
+#### Get by id
+SELECT * FROM public."users"
+WHERE id = 1 (or any other operator on any other column)
+
+#### Get with LIKE
+SELECT * FROM public."users"
+WHERE login LIKE 'clucien'
+or WHERE login LIKE 'c%' (wildcard)
+
+#### Get with conditionning
+SELECT * FROM public."users"
+WHERE login LIKE 'jbond' AND/OR id = '2'
+or WHERE NOT login LIKE 'jbond'
+
+#### Order by
+SELECT * FROM public."users"
+ORDER BY name DESC/ASC (descending/ascending - default -)
+
+## Nest for DBs (nest)
+
+npm install --save @nestjs/typeorm typeorm mysql2

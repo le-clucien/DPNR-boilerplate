@@ -1,4 +1,9 @@
 version: '3.9'
+secrets:
+  psql-user:
+    file: ./secrets/psql-user.txt
+  psql-pass:
+    file: ./secrets/psql-pass.txt
 services:
   server:
     build: ./server
@@ -10,5 +15,31 @@ services:
     build: ./client
     ports:
       - 3000:3000
+    secrets:
+      - psql-user
+      - psql-pass
     environment:
       - EXPOSE_PORT=3000
+  pg-server:
+    image: postgres
+    ports:
+      - 5432:5432
+    secrets:
+      - psql-user
+      - psql-pass
+    environment:
+      - POSTGRES_USER_FILE=/run/secrets/psql-user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/psql-pass
+      - POSTGRES_DB=data
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
+    container_name: pg-server
+  pg-client:
+    build:
+      context: ./pg-client
+      dockerfile: ./Dockerfile
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=clement@clucien.com
+      - PGADMIN_DEFAULT_PASSWORD=1234
