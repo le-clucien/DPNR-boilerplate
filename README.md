@@ -8,6 +8,11 @@ Boilerplate project:	nest new project-name server (from root)
 
 npm start from project-name to start server
 
+Nest shortcuts: 
+nest g mo article module
+nest g co article module
+nest g s article module
+
 ## Client setup
 
 Setup react app : npx create-react-app client --template typescript (from project root root)
