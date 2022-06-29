@@ -1,15 +1,18 @@
 FROM	node:17-alpine3.14
 
-RUN		npm i -g @nestjs/cli
-
 WORKDIR /app
 
 COPY	./package.json ./
 COPY	./package-lock.json ./
 COPY	./tsconfig* ./
 
-RUN		npm install
+RUN		npm install --force
 
 COPY	./src ./src
+COPY	./public ./public
 
-CMD		npm run build
+RUN		npm run build
+
+EXPOSE	3000
+
+CMD		npx serve -s build -l 3000

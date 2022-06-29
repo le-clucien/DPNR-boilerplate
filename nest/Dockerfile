@@ -8,8 +8,12 @@ COPY	./package.json ./
 COPY	./package-lock.json ./
 COPY	./tsconfig* ./
 
-RUN		npm install
+RUN		npm install --force
 
 COPY	./src ./src
 
-CMD		npm run start
+EXPOSE	5000
+
+RUN		npm run build
+
+CMD		nest start
